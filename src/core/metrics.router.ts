@@ -25,6 +25,7 @@ export const applyMetrics = <T extends AffluRouter<T>>(router: T, config: Metric
         }
         next();
     });
+    
 
     router.use(
         promBundle({

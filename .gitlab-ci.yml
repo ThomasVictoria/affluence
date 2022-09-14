@@ -1,0 +1,17 @@
+stages:
+  - test
+  - build
+
+test:
+  image: node:16
+  stage: test
+  script:
+    - npm i
+    - npm run test
+
+build:
+  image: docker:20.10.16
+  stage: build
+  needs: ['test']
+  script:
+    - docker build . -t $CI_COMMIT_SHA --build-arg 3000 --build-arg true --build-arg ARG_PROM_TOKEN $PROM_TOKEN
